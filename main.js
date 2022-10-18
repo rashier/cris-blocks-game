@@ -19,6 +19,9 @@ let brickOffsetTop = 30
 let brickOffsetLeft = 30
 let bricks = []
 
+let bricksColors = Array(brickRowCount * brickColumnCount).fill().map(() => getRandomColor())
+console.log(bricksColors)
+
 for (let c = 0; c < brickColumnCount; c++) {
   bricks[c] = []
   for (let r = 0; r < brickRowCount; r++) {
@@ -84,6 +87,7 @@ const drawScore = () => {
 }
 
 const drawBricks = () => {
+  let setColorIndex = 0
   for (let c = 0; c < brickColumnCount; c++) {
     for (let r = 0; r < brickRowCount; r++) {
       if (bricks[c][r].status == 1) {
@@ -94,10 +98,11 @@ const drawBricks = () => {
         bricks[c][r].y = brickY
         ctx.beginPath()
         ctx.rect(brickX, brickY, brickWidth, brickHeight)
-        ctx.fillStyle = '#0095DD'
+        ctx.fillStyle = bricksColors[setColorIndex]
         ctx.fill()
         ctx.closePath()
       }
+      setColorIndex++
     }
   }
 }
